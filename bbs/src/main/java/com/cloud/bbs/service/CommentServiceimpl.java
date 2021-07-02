@@ -1,0 +1,38 @@
+package com.cloud.bbs.service;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cloud.bbs.dao1.CommentDao;
+import com.cloud.bbs.dto.CommentDto;
+
+@Service
+public class CommentServiceimpl implements CommentService {
+	
+	@Autowired
+	private CommentDao commentDao;
+
+	@Override
+	public List<CommentDto> commentWrite(CommentDto comment) {
+		commentDao.commentWrite(comment);
+		HashMap<String, Integer> hm = new HashMap<>();
+		hm.put("articleNum", comment.getArticleNum());
+		hm.put("commentRow", 10);
+		return commentDao.getComments(hm);		
+	}
+
+	@Override
+	public List<CommentDto> commentRead(int articleNum, int commentRow) {
+		HashMap<String, Integer> hm = new HashMap<>();
+		hm.put("articleNum", articleNum);
+		hm.put("commentRow", commentRow);
+		return commentDao.getComments(hm);
+	}
+	
+	
+	
+
+}
