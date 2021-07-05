@@ -34,7 +34,7 @@ public class BBSController {
    
 //   @RequestMapping(value="/write.bbs", method = RequestMethod.GET)
    @GetMapping("/write.bbs")
-   public String writeForm() {
+   public String writeForm(HttpSession session) {
 
       return "writeForm";
    }

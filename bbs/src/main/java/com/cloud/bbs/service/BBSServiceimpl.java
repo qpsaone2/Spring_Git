@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cloud.bbs.common.FileSaveHelper;
@@ -51,8 +52,8 @@ public class BBSServiceimpl implements BBSService {
 		return "login";
 	}
 	
-
 }
+   @Transactional()
    @Override
    public void write(BBSDto article, List<MultipartFile> fileUpload) {
       System.out.println(article.getArticleNum());

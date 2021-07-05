@@ -15,13 +15,14 @@ public class SignInInterceptor implements HandlerInterceptor {
 			throws Exception {
 		if(!request.getMethod().equalsIgnoreCase("GET")) {
 			return true;
-		}else {
+		}
+		else {
 			HttpSession session = request.getSession();
 			if(session.getAttribute("id")==null) {
 				response.sendRedirect("login.bbs");
 				return false;
 			}
-			return true;
+		return true;
 		}
 		}
 		}
