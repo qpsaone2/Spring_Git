@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+              "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+              
+<mapper namespace="com.cloud.bbs.dao.BBSDao">
+
+	<select id="getTotalCount"  resultType="int">
+	   SELECT count(*)
+	   FROM BBS
+	</select>
+	
+	<select id="list"  resultType="article">
+	   SELECT *
+	   FROM BBS
+	   ORDER BY ARTICLENUM DESC
+	</select>
+	
+	<select id="login" parameterType="String" resultType="String">
+		SELECT PASS
+		FROM LOGIN
+		WHERE ID=#{id}
+	</select>
+	
+	<insert id="write" parameterType="article" useGeneratedKeys="true" 
+			keyProperty="articleNum" keyColumn="articleNum">
+		INSERT INTO BBS VALUES(bbs_seq.nextval ,#{id},#{title},#{content},sysdate)
+	</insert>
+	
+	<select id="content" parameterType="String" resultType="article">
+		SELECT *
+		FROM bbs
+		WHERE articleNum=#{articleNum}
+	</select>
+	
+	<select id="getCommentCount" parameterType="String" resultType="Integer">
+		SELECT count(*)
+		FROM comments
+		WHERE articleNum=#{articleNum}
+	</select>
+	
+	<select id="getOriginalFileName" parameterType="String" resultType="String">
+		SELECT originalFileName
+		FROM fileList
+		WHERE savedFileName=#{savedFileName}
+	</select>
+	
+	<select id="getFiles" parameterType="String" resultType="file">
+	   SELECT ORIGINALFILENAME, SAVEDFILENAME
+	   FROM FILELIST
+	   WHERE articleNum=#{articleNum}
+	</select>
+	
+	<select id="updateForm" parameterType="String" resultType="article">
+		SELECT articleNum,title, content
+		FROM bbs
+		WHERE articleNum=#{articleNum}
+	</select>
+	
+	<update id="update" parameterType="article">
+		UPDATE bbs
+		set title=#{title}, content=#{content}		
+		WHERE articleNum=#{articleNum}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		DELETE
+		FROM BBS		
+		WHERE articleNum=#{articleNum}
+	</delete>
+	
+	<insert id="insertFile" parameterType="file">
+		INSERT INTO FILELIST VALUES(file_seq.nextval ,#{originalFileName},#{savedFileName},#{articleNum})
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+</mapper>

@@ -1,0 +1,5 @@
+package com.cloud.bbs.configuration;
+
+public class RootConfig {
+
+}

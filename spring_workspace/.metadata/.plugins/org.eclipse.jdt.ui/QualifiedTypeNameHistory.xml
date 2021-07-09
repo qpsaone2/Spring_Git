@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
+    <fullyQualifiedTypeName name="java.io.File"/>
+    <fullyQualifiedTypeName name="org.junit.Test"/>
+    <fullyQualifiedTypeName name="org.springframework.web.context.support.AnnotationConfigWebApplicationContext"/>
+    <fullyQualifiedTypeName name="javax.servlet.ServletRegistration"/>
+    <fullyQualifiedTypeName name="javax.servlet.ServletRegistration.Dynamic"/>
+    <fullyQualifiedTypeName name="javax.servlet.FilterRegistration"/>
+    <fullyQualifiedTypeName name="javax.servlet.FilterRegistration.Dynamic"/>
+    <fullyQualifiedTypeName name="java.util.EnumSet"/>
+    <fullyQualifiedTypeName name="org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry"/>
+    <fullyQualifiedTypeName name="org.springframework.web.servlet.view.InternalResourceViewResolver"/>
+    <fullyQualifiedTypeName name="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+</qualifiedTypeNameHistroy>

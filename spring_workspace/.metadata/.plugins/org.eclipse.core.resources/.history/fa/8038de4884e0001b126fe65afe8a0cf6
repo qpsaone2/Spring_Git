@@ -1,0 +1,5 @@
+package com.cloud.bbs.SingleTon;
+
+public class SingleTon {
+
+}

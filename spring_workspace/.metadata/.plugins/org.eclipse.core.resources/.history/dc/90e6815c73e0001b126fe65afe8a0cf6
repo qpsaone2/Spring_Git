@@ -1,0 +1,36 @@
+package com.cloud.bbs.configuration;
+
+import java.util.EnumSet;
+
+import javax.servlet.FilterRegistration;
+import javax.servlet.ServletRegistration;
+
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+
+public class WebXmlConfig implements WebApplicationInitializer {
+	
+	
+	@Override
+	public void onStartup(ServletContext servletContext) thorws ServletException{
+		registerDispathcherServlet(servletContext);
+		registerCharcaterEncodingFilter(servletContext);
+	}
+	
+	private void registerDispatcherServlet(ServletContext serlvetContext) {
+		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
+		context.register(RootConfig.class);
+		servletContext.addListener(new ContextLoaderListener(context));
+		AnnotationConfigWebApplicationContext webContext = new  AnnotationConfigWebApplicationContext();
+		webContext.register(ServletConfig.class);
+		ServletRegistration.Dynamic dispatcher = servletContext.addServlet("DispatcherServlet", new DispatcherServlet(webContext));
+		dispatcher.setLoadOnStartup(1);
+		dispatcher.addMapping("*.bbs");
+	}
+	
+	private void registerCharacterEncodingFilter(ServletContext servletContext) {
+		FilterRegistration.Dynamic characterEncodingFilter = servletContext.addFilter("encodingFilter", new CharacterEncodingFilter());
+		characterEncodingFilter.setInitParameter("encodingFilter","UTF-8");
+		characterEncodingFilter.setInitParameter("forceEncoding","true");
+		characterEncodingFilter.addMappingForServletNames(EnumSet.allOf(DispatcherType.class)), true,"/*");
+	}
+}

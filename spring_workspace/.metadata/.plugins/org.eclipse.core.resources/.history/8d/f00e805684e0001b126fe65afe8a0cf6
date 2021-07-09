@@ -1,0 +1,9 @@
+package com.cloud.bbs.SingleTonTest;
+
+
+
+public class SingleTon {
+	private SingleTonTest() {
+		
+	}
+}
