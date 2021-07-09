@@ -4,10 +4,9 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
 	<welcome-file-list>
-		<welcome-file>/WEB-INF/views/human.jsp</welcome-file>
-	</welcome-file-list>
-
-
+   		<welcome-file>/WEB-INF/views/human.jsp</welcome-file>
+    </welcome-file-list>
+    	
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter
@@ -17,28 +16,27 @@
 			<param-value>UTF-8</param-value>
 		</init-param>
 	</filter>
-	<fiter-mapping>
+	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
-	</fiter-mapping>
-
-
+	</filter-mapping>
+	
+	
 	<!-- The definition of the Root Spring Container shared by all Servlets 
 		and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/root-context.xml</param-value>
 	</context-param>
+	
 
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener
-		</listener-class>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-
+	
 	<listener>
-		<listener-class>com.cloud.bbs.TestListener
-		</listener-class>
+		<listener-class>com.cloud.bbs.TestListener</listener-class>
 	</listener>
 
 	<!-- Processes application requests -->
@@ -58,8 +56,7 @@
 		<servlet-name>bbsServlet</servlet-name>
 		<url-pattern>*.bbs</url-pattern>
 	</servlet-mapping>
-
-
+	
 	<servlet>
 		<servlet-name>commentServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet

@@ -8,10 +8,9 @@ public class TestListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		
-		ServletContext slc = sce.getServletContext();
+		ServletContext slc=sce.getServletContext();
 		System.out.println(slc.getInitParameter("contextConfigLocation"));
-		System.out.println("동작하나요?");
+		System.out.println("동작하나요,,");
 
 	}
 

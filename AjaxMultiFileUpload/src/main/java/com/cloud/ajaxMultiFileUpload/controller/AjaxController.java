@@ -57,21 +57,21 @@ public class AjaxController {
 	
 	@ResponseBody
 	@GetMapping("/displayFile.bbs")
-	public ResponseEntity<byte[]>  displayFile(@RequestParam("fileName") String fileName)	throws Exception{
+	public ResponseEntity<byte[]>  displayFile(@RequestParam("fileName") String fileName) throws Exception{
 		System.out.println(fileName);
 		InputStream in = null; 
 		ResponseEntity<byte[]> entity = null;
 		try{      
-			String formatName = fileName.substring(fileName.lastIndexOf(".")+1); //lastIndexOf 뒤에서 부터 찾아서 처음 나타나는 . 을찾는다 그뒤  +1 
+			String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
 			MediaType mType = MediaUtils.getMediaType(formatName);      
 			HttpHeaders headers = new HttpHeaders();      
-			in = new FileInputStream(saveDir+fileName);	 //s_가 붙은 썸네일 이미지 넘어옴
-			if(mType != null) {
-				headers.setContentType(mType); //이미지 다운도르 알려줌
+			in = new FileInputStream(saveDir+fileName);	
+			if(mType != null){
+				headers.setContentType(mType);
 			}else{			      
-				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);			//일반다운로드 헤더에 알렴줌
+				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);			
 			}			
-			fileName = fileName.substring(fileName.indexOf("_")+1);  //앞에서부터 읽으면서 _가 나타남,첫번쨰 _가있는 뒤를 다 잘라냄
+			fileName = fileName.substring(fileName.indexOf("_")+1); 
 			headers.add("Content-Disposition","attachment; filename=\""+ 
 					URLEncoder.encode(fileName,"utf-8").replace("+","%20")+"\"");
 			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
@@ -86,19 +86,42 @@ public class AjaxController {
 	}
 	
 	@ResponseBody
-	@PostMapping(value = "/deleteFile.bbs")
-	public ResponseEntity<String> deleteFile(String fileName){
-		String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
+	@PostMapping(value="/deleteFile.bbs")
+	public ResponseEntity<String> deleteFile(String fileName){		   
+		String formatName = fileName.substring(fileName.lastIndexOf(".")+1);    
 		MediaType mType = MediaUtils.getMediaType(formatName);
 		
-		new File(saveDir + fileName.replace('/',File.separatorChar)).delete();
-		
-		if(mType !=null) {
+		new File(saveDir + fileName.replace('/', File.separatorChar)).delete();
+
+		if(mType != null){      
 			String front = fileName.substring(0,12);
 			String end = fileName.substring(14);
-			new File(saveDir + (front+end).replace('/',File.separatorChar)).delete();
+			new File(saveDir+(front+end).replace('/', File.separatorChar)).delete();
+		}
+  
+		return new ResponseEntity<String>("deleted", HttpStatus.OK);
+	}  
+	
+	@ResponseBody
+	@PostMapping(value="/deleteAllFiles.bbs")
+//	ajax() 함수가 배열을 직렬화 하지 않고 보낼때는..아래 코드처럼 해도 처리됨
+//	public ResponseEntity<String> deleteFile(@RequestParam("files[]") String[] files){
+	public ResponseEntity<String> deleteFile(@RequestParam("files") String[] files){		   
+		if(files == null || files.length == 0) {
+			return new ResponseEntity<String>	("deleted", HttpStatus.OK);
+		}
+		for (String fileName : files) {
+			String formatName=fileName.substring(fileName.lastIndexOf(".")+1);      
+			MediaType mType = MediaUtils.getMediaType(formatName);      
+			if(mType != null){        
+				String front = fileName.substring(0,12);
+				String end = fileName.substring(14);
+				new File(saveDir + (front+end).replace('/', File.separatorChar)).delete();
+			}
+			new File(saveDir + fileName.replace('/', File.separatorChar)).delete();      
 		}
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
-	}
+	}  
+
 	
 }
