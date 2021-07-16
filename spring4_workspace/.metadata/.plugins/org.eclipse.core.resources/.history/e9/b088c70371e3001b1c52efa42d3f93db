@@ -1,0 +1,5 @@
+package com.ggoreb.hospital.controller;
+
+public class HomeController {
+
+}

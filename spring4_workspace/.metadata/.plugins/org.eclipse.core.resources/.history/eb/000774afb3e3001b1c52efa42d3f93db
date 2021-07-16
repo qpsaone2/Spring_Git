@@ -1,0 +1,5 @@
+package com.ggoreb.hospital.model;
+
+public class Hospital {
+
+}

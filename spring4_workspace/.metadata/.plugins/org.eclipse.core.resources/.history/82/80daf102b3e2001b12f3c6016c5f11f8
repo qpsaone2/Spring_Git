@@ -1,0 +1,13 @@
+package com.example.demo;
+
+import javax.persistence.Entity;
+
+import lombok.Data;
+
+@Data
+@Entity
+public class Member {
+	String name;
+	int age;
+	
+}

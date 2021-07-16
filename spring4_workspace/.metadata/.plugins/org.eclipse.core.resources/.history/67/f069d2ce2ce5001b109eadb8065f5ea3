@@ -1,0 +1,23 @@
+package com.ggoreb.basic.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.ggoreb.basic.model.Board;
+
+@Controller
+public class BoardController {
+
+		@GetMapping("/write")
+		public String write() {
+			return "write";
+		}
+		
+		@PostMapping("/write")
+		public String writePost(@ModelAttribute Board board) {
+			System.out.println(board);
+			return "redirect:/main";
+		}
+}

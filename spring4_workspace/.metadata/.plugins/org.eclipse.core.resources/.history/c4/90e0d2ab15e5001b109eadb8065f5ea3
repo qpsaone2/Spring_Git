@@ -1,0 +1,36 @@
+package com.ggoreb.basic.controller;
+
+import java.util.Iterator;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+@Controller
+public class UploadController {
+	@GetMapping("/upload1")
+	public String upload1() {
+		return "upload1";
+	}
+
+	@PostMapping("/upload1")
+	@ResponseBody
+	public String upload1Post(MultipartHttpServletRequest mRequest) {
+		
+		Iterator<String> iter = mRequest.getFileNames();
+		while (iter.hasNext()) {
+			String name = iter.next();
+			System.out.println(name);
+		}
+		iter.next();
+		
+		
+//		String result = "";
+//		MultipartFile mFile = mRequest.getFile("file");
+//		String oName = mFile.getOriginalFilename();
+//		result += oName + "\n";
+		return "아무거나";
+	}
+}

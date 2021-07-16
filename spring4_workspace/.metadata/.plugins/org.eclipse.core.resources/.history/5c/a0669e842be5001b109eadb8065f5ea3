@@ -1,0 +1,5 @@
+package com.ggoreb.basic.controller;
+
+public class BoardController {
+
+}

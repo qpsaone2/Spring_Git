@@ -1,0 +1,41 @@
+package com.ggoreb.practice.config;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import com.ggoreb.practice.interceptor.CertificationInterceptor;
+
+@Configuration
+@MapperScan(value = { "com.**.mapper" })
+public class WebConfig extends WebMvcConfigurerAdapter {
+
+	/*
+	 * mybatis mapper 설정
+	 */
+	@Bean
+	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
+		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+		sqlSessionFactoryBean.setDataSource(dataSource);
+		Resource[] arrResource = new PathMatchingResourcePatternResolver()
+				.getResources("classpath:mapper/**/*Mapper.xml");
+		sqlSessionFactoryBean.setMapperLocations(arrResource);
+		sqlSessionFactoryBean.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);
+		return sqlSessionFactoryBean.getObject();
+	}
+
+	/*
+	 * 로그인 인증 Interceptor 설정
+	 */
+	@Autowired
+	CertificationInterceptor certificationInterceptor;
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(certificationInterceptor).addPathPatterns("/**/*.do");
+	}
+
+}

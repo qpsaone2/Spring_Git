@@ -1,0 +1,5 @@
+<table border="1">
+   <tr>
+      <td th:text="${area}"></td>
+   </tr>
+</table>

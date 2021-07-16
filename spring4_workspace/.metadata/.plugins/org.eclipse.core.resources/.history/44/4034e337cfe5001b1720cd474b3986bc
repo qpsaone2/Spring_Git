@@ -1,0 +1,31 @@
+package com.ggoreb.practice.controller;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.ggoreb.practice.model.Answer;
+import com.ggoreb.practice.model.User;
+import com.ggoreb.practice.repository.AnswerRepository;
+
+@Controller
+public class AnswerController {
+	@Autowired
+	AnswerRepository answerRepository;
+	
+	@PostMapping("/answer/create")
+	public String answerCreate(
+			@ModelAttribute Answer answer, HttpSession session, @RequestParam("q_id") Long q_id) {
+		Object obj = session.getAttribute("user");
+		User user = (User) obj;
+		answer.setUser(user);  
+		
+		answerRepository.save(answer);
+		return "question_list";
+	}
+	
+}

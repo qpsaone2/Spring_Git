@@ -1,0 +1,13 @@
+<table border = "1">
+   <tr>
+      <th>순번</th>
+      <th>시도</th>
+      <th>이름</th>
+   </tr>
+   <tr th:each="hospital : ${list}">
+      <td>[[${hospital.id}]]</td>
+      <td th:text="${hospital.sido}"></td>
+      <td th:text="${hospital.name}"></td>
+   
+   </tr>
+</table>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+
+<body>
+    <p id="pid"> </p>
+
+    <table border="1">
+        <thead>
+            <th>번호</th>
+            <th>시군구</th>
+            <th>기관명</th>
+            <th>진료과수</th>
+            <th>병상수</th>
+            <th>전화번호</th>
+            <th>주소</th>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+
+    <script type="text/javascript">
+        var xmlhttp = new XMLHttpRequest();
+
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                jsonFunction(xmlhttp.responseText);
+            }
+        }
+
+        xmlhttp.open("GET", "bookJSON.json", true);
+        xmlhttp.send();
+
+        function jsonFunction(resp) {
+            var arr = JSON.parse(resp);
+            var txt = "";
+            for (i = 0; i < arr.length; i++) {
+                var id = arr[i].id;
+                var sido = arr[i].sido;
+                var name = arr[i].name;
+                var medical = arr[i].medical;
+                var room = arr[i].room;
+                var tel = arr[i].tel;
+                var address = arr[i].address;
+                
+
+                var thid = document.createTextNode(id);
+                var tdsido = document.createTextNode(sido);
+                var tdPrice = document.createTextNode(name);
+                var tdPrice = document.createTextNode(medical);
+                var tdPrice = document.createTextNode(room);
+                var tdPrice = document.createTextNode(tel);
+                var tdPrice = document.createTextNode(address);
+                var tr = document.createElement("tr");
+                var th = document.createElement("th");
+                var td1 = document.createElement("td");
+                var td2 = document.createElement("td");
+
+                th.appendChild(thTitle);
+                td1.appendChild(tdAuthor);
+                td2.appendChild(tdPrice);
+
+                tr.appendChild(th);
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+
+                var tbody = document.getElementsByTagName("tbody")[0];
+
+                tbody.appendChild(tr);
+
+            }
+            document.getElementById("pid").innerHTML = txt;
+        };
+    </script>
+</body>
+
+</html>

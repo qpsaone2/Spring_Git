@@ -1,0 +1,16 @@
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  const data = axios({
+//		url: '/json/map',
+		url: '/member',
+		method: 'get',
+		params: {
+			'id': 1, 'pw': 'abcd',
+			'name': 'hong'
+		}
+	});
+	
+	data.then(function(result) {
+		console.log(result.data);
+	});
+</script>

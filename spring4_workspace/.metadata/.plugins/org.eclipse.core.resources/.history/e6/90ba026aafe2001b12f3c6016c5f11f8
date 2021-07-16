@@ -1,0 +1,24 @@
+package com.example.demo.controller;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HomeController {
+
+	@GetMapping("/")
+	public String index() {
+		return "ok";
+	}
+	@GetMapping("/json")
+	public Map<String, Object> json() {
+		Map<String,Object> map = new HashMap<>();
+		map.put("name", "home");
+		map.put("age", 30);
+		return "map";
+	}
+	
+}

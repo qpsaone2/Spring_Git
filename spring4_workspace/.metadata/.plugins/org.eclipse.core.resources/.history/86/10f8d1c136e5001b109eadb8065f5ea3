@@ -1,0 +1,40 @@
+package com.ggoreb.basic.controller;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+@RestController
+public class RestTemplateController {
+	@SuppressWarnings("unchecked")
+	@GetMapping("/getString")
+	public List<Map<String, Object>> getString() {
+		RestTemplate rt = new RestTemplate();
+		List<Map<String, Object>> result = 
+				rt.getForObject("http://ggoreb.com/http/json3.jsp", List.class);
+		
+		for(int i = 0; i<result.size(); i++) {
+			Map<String, Object> map = result.get(i);
+			String name = (String) map.get("name");
+			System.out.println(name);
+		}
+		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@GetMapping("/getData")
+	public List<Map<String, Object>> getData() {
+		RestTemplate rt = new RestTemplate();
+		List<Map<String, Object>> result = 
+				rt.getForObject("http://ggoreb.com/dinosaur/info.jsp", List.class);
+		
+		for(int i = 0; i<result.size(); i++) {
+			Map<String, Object> map = result.get(i);
+			List<Map<String, Object>> dinosaurs= (List<Map<String, Object>>) map.get("dinosaurs")
+		}
+		return result;
+	}
+}

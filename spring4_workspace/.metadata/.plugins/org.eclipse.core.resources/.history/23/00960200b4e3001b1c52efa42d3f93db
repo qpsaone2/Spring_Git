@@ -1,0 +1,9 @@
+package com.ggoreb.hospital.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.ggoreb.hospital.model.Emp;
+
+public interface HospitalListRepository extends JpaRepository<HospitalList, Integer> {
+
+}

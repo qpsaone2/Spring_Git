@@ -1,0 +1,32 @@
+<table
+            border="1"
+            width="50%"
+            height="200"
+            cellspacing="5">
+            <caption>표 제목.l</caption>
+            <thead>
+                <tr align="center" bgcolor="white">
+                    <td></td>
+                    <th>번호</th>
+                    <th>시군구</th>
+                    <th>기관명</th>
+                    <th>진료과수</th>
+                    <th>병상수</th>
+                    <th>전화번호</th>
+                    <th>주소</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr align="center" bgcolor="white">
+                    <th>월급</th>
+                    <td>[[${hospital.id}]]</td>
+                    <td>[[${hospital.sido}]]</td>
+                    <td>[[${hospital.name}]]</td>
+                    <td>[[${hospital.medical}]]</td>
+                    <td>[[${hospital.room}]]</td>
+                    <td>[[${hospital.tel}]]</td>
+                    <td>[[${hospital.address}]]</td>
+                </tr>    
+            </tbody>
+        </table>

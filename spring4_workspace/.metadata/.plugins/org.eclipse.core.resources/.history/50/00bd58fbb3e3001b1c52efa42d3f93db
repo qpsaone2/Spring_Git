@@ -1,0 +1,5 @@
+package com.ggoreb.hospital.repository;
+
+public interface HospitalListRepository {
+
+}
